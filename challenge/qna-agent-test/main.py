@@ -12,7 +12,6 @@ import argparse
 
 script_base_path = Path(__file__).parent.resolve() 
 skills_dir = Path(__file__).parent.parent.resolve() / 'qna_agent' / 'skills'
-chinook_db_path = script_base_path / "chinook.db"
 
 async def test_qna_agent(inf_url,nvidia_api_key):
     agent = create_sql_agent(skills_dir,inf_url,nvidia_api_key,debug=True)   
@@ -23,18 +22,8 @@ async def test_qna_agent(inf_url,nvidia_api_key):
         }]
     }     
     result = agent.invoke(input)
-
-    try:
-        sql_cmd = result['structured_response'].sql
-        conn = sqlite3.connect(str(chinook_db_path))
-        cursor = conn.cursor()
-        cursor.execute(sql_cmd)
-        results = cursor.fetchall()
-        print(results)
-    except Exception as e:
-        print(e)
-    finally:
-        conn.close()
+    output = result['messages'][-1].content
+    print(output)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='qna agent')

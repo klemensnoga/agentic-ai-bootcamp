@@ -71,21 +71,12 @@ async def qna_agent(state:State,config: RunnableConfig):
     agent = create_sql_agent(skills_dir,inf_url,nvidia_api_key,debug=True)
     messages = convert_to_openai_messages([*state['messages']])
     result = agent.invoke({'messages':messages})
-    try:
-        sql_cmd = result['structured_response'].sql
-        conn = sqlite3.connect(str(chinook_db_path))
-        cursor = conn.cursor()
-        cursor.execute(sql_cmd)
-        results = cursor.fetchall()
-        output = {
-            "messages": [{"role": "assistant", "content": json.dumps(results)}],
-        }
-    except:
-        output = {
-            "messages": [{"role": "assistant", "content": "error executing sql command"}]
-        }
-    finally:
-        conn.close()
+    output = result['messages'][-1].content
+    output = output.replace('\u202f', ' ')
+    output = {
+        "messages": [{"role": "assistant", "content": output}],
+    }
+
     return output
 
 async def refund_agent(state:State,config: RunnableConfig):

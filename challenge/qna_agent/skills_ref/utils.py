@@ -43,36 +43,3 @@ def list_skills(skills_dir: Path) -> list[SkillProperties]:
             skills.append(props)
 
     return skills
-
-def load_skill_instruction(skill_dir: Path) -> str:
-    """List all skills from a single skills directory (internal helper).
-
-    Scans the skills directory for subdirectories containing SKILL.md files,
-    parses YAML frontmatter, and returns skill metadata.
-
-    Skills are organized as:
-    skills/
-    ├── skill-name/
-    │   ├── SKILL.md        # Required: instructions with YAML frontmatter
-    │   ├── script.py       # Optional: supporting files
-    │   └── config.json     # Optional: supporting files
-
-    Args:
-        skills_dir: Path to the skills directory.
-        source: Source of the skills ('user' or 'project').
-
-    Returns:
-        List of skill metadata dictionaries with name, description, path, and source.
-    """
-    # Check if skills directory exists
-    if not skill_dir.exists():
-        return []
-
-    # Validate a skill directory
-    problems = validate(skill_dir)
-    if problems:
-        print("Validation errors:", problems)
-    
-    instruction = read_instruction(skill_dir)
-
-    return instruction
