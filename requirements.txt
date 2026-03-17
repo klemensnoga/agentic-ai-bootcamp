@@ -1,3 +1,6 @@
+# Jupyter
+jupyter>=1.1.1
+
 # MCP Server dependencies
 fastmcp>=3.1.1
 mcp[cli]>=1.12.3
