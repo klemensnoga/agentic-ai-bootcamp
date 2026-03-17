@@ -14,5 +14,4 @@ langgraph>=1.1.2
 nvidia-nat[langchain]>=1.5.0
 
 # Observability
-phoenix>=0.9.1
 arize-phoenix>=13.15.0
