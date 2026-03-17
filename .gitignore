@@ -10,3 +10,6 @@ wheels/
 .venv
 .vscode/
 tutorial/jupyter_notebook/skills/
+
+# macOS
+.DS_Store
