@@ -12,6 +12,7 @@ langgraph>=1.1.2
 
 # NeMo Agent Toolkit
 nvidia-nat[langchain]>=1.5.0
+nvidia-nat[mcp]>=1.5.0
 
 # Observability
 arize-phoenix>=13.15.0
