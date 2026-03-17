@@ -1,11 +1,9 @@
-import uuid
 import subprocess
-from typing import TypedDict, NotRequired
+from typing import NotRequired
 from langchain.tools import tool
 from langchain.agents import create_agent
 from langchain.agents.middleware import ModelRequest, ModelResponse, AgentMiddleware, AgentState
 from langchain.messages import SystemMessage
-from langgraph.checkpoint.memory import InMemorySaver
 from langchain.chat_models import init_chat_model
 from typing import Callable
 from pathlib import Path
@@ -92,10 +90,6 @@ class SkillMiddleware(AgentMiddleware):
         response = handler(modified_request)
         return response
 
-from pydantic import BaseModel, Field
-class Output(BaseModel):
-    output: str = Field(description="retrieve data from database")
-
 def create_sql_agent(skills_dir,inf_url,nvidia_api_key,debug=False):
     model_id = "openai/gpt-oss-120b"
     nvidia_model = init_chat_model(model=model_id,base_url=inf_url,api_key=nvidia_api_key,model_provider="nvidia")
@@ -110,8 +104,6 @@ def create_sql_agent(skills_dir,inf_url,nvidia_api_key,debug=False):
             """
         ),
         middleware=[SkillMiddleware(skills_dir)],
-        # checkpointer=InMemorySaver(),
-        # response_format=Output,
         debug=debug
     )
     return agent
