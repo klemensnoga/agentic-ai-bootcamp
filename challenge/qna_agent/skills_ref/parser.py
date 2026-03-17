@@ -110,29 +110,3 @@ def read_properties(skill_dir: Path) -> SkillProperties:
         allowed_tools=metadata.get("allowed-tools"),
         metadata=metadata.get("metadata"),
     )
-
-def read_instruction(skill_dir: Path) -> SkillProperties:
-    """Read skill properties from SKILL.md frontmatter.
-
-    This function parses the frontmatter and returns properties.
-    It does NOT perform full validation. Use validate() for that.
-
-    Args:
-        skill_dir: Path to the skill directory
-
-    Returns:
-        SkillProperties with parsed metadata
-
-    Raises:
-        ParseError: If SKILL.md is missing or has invalid YAML
-        ValidationError: If required fields (name, description) are missing
-    """
-    skill_md = find_skill_md(skill_dir)
-
-    if skill_md is None:
-        raise ParseError(f"SKILL.md not found in {skill_dir}")
-
-    content = skill_md.read_text()
-    _, body = parse_frontmatter(content)
-
-    return body

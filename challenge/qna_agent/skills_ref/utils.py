@@ -1,7 +1,7 @@
 from pathlib import Path
 from .models import SkillProperties
 from .validator import validate
-from .parser import read_properties,read_instruction
+from .parser import read_properties
 def list_skills(skills_dir: Path) -> list[SkillProperties]:
     """List all skills from a single skills directory (internal helper).
 
