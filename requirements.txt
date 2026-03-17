@@ -1,10 +1,13 @@
 # MCP Server dependencies
-fastmcp==3.1.1
+fastmcp>=3.1.1
 
 # LangGraph demo dependencies
-langchain==1.2.12
+langchain>=1.2.12
 langchain-nvidia-ai-endpoints>=0.3.5
 langgraph>=1.1.2
 
 # NeMo Agent Toolkit
-nvidia-nat[langchain]==1.5.0
+nvidia-nat[langchain]>=1.5.0
+
+# Observability
+phoenix>=0.9.1
