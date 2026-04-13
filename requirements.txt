@@ -3,11 +3,11 @@ jupyter>=1.1.1
 
 # MCP Server dependencies
 fastmcp>=3.1.1
-mcp[cli]>=1.26.0
+mcp[cli]>=1.12.3
 
 # LangGraph demo dependencies
 langchain>=1.2.12
-langchain-nvidia-ai-endpoints>=1.0.2
+langchain-nvidia-ai-endpoints>=0.3.5
 langgraph>=1.1.2
 
 # NeMo Agent Toolkit
@@ -19,11 +19,3 @@ nvidia-nat[profiling]>=1.5.0
 
 # Observability
 arize-phoenix>=13.15.0
-
-# Unit tests
-httpx>=0.28.1
-openai>=2.16.0
-pandas>=2.2.0,<3.0.0
-rouge>=1.0.1
-strictyaml>=1.7.3
-tabulate>=0.9.0
