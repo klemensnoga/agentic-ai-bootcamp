@@ -17,7 +17,7 @@ class SkillsState(AgentState):
     """List of loaded skill metadata (name, description, path)."""
 
 script_base_path = Path(__file__).parent.resolve() 
-chinook_db_path = script_base_path / "chinook.db"
+chinook_db_path = script_base_path / "notobvious.db"
 
 # Create bash tool for filesystem-based agent
 @tool
@@ -77,8 +77,9 @@ class SkillMiddleware(AgentMiddleware):
             f"\n\n## Available Skills\n\n{self.skills_prompt}\n\n"
             "Use the bash tool to read skill instructions, e.g., "
             "`bash('cat /path/to/skill/SKILL.md')`. "
-            "You can also use the bash tool to execute SQL queries with sqlite3, e.g., "
+            "You can also use the bash tool to execute SQL queries with sqlite3. e.g., "
             "`bash('sqlite3 database.db \"SELECT ...\"')`."
+            "Do not use sqlite3 to read schema of tables."
         )
 
         # Append to system message content blocks
@@ -98,8 +99,8 @@ def create_sql_agent(skills_dir,inf_url,nvidia_api_key,debug=False):
         nvidia_model,
         system_prompt=(
             f"""
-            Follow these steps to answer the question from the user. Assume you do not know the schema of the database.
-            1) Generate SQL query
+            Follow these steps to answer the question from the user.
+            1) Generate the SQL query based on the schema
             2) Retrieve data from {chinook_db_path} using the SQL query generated in 1).
             """
         ),
