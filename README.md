@@ -1,4 +1,4 @@
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Python](https://img.shields.io/badge/python-%3E%3D3.13-blue.svg)](https://www.python.org/downloads/)
 
 # Agentic AI Bootcamp
 This bootcamp introduces developers to the foundations of building AI agents that can interact with external tools, data sources, and services. Participants will learn how to leverage **NVIDIA® NIM™** microservices for accelerated inference, implement the **Model Context Protocol (MCP)** for standardized AI-to-tool communication, and orchestrate agentic workflows using **LangGraph** followed by a Challenge.
