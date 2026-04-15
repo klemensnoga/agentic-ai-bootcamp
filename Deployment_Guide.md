@@ -1,13 +1,21 @@
 # Agentic AI Bootcamp
 
-The Agentic AI Bootcamp helps developers get started with building AI agents that can interact with external tools, data sources, and services. The labs guide participants through deploying NVIDIA® NIM™ microservices via cloud and local endpoints, and implementing the Model Context Protocol (MCP) for standardized AI-to-tool communication. Attendees will build MCP servers using both high-level (FastMCP) and low-level SDKs, exploring Stdio and HTTP transports for local and remote deployments. Participants will also design agentic workflows using LangGraph's StateGraph to orchestrate multi-step reasoning and tool invocation. The bootcamp concludes with a hands-on challenge where attendees build a complete AI agent integrating Q&A and Invoice MCP servers.
+This bootcamp is a hands-on path from inference to production-style agents. You will call **NVIDIA® NIM™** from cloud and local endpoints, expose and consume capabilities with the **Model Context Protocol (MCP)** (including a low-level server implementation), and orchestrate reasoning and tool use with **LangGraph**. You will then use **NeMo Agent Toolkit (NAT)** to connect MCP tools to NIM with **YAML** workflow configuration—plus observability and evaluation—before tying the stack together in a final **Challenge**.
 
+## Deploying the Labs
 
 ### Tested environment
 
-We tested and ran all labs on a DGX machine equipped with an Ampere A100 GPU.
+We tested and ran all labs on a DGX machine equipped with an A100 and H100 GPUs (80GB).
 
-# Deploying the Labs
+### Prerequisites
+
+Basic experience with Python programming is required for this bootcamp. Familiarity with fundamental concepts of Large Language Models (LLMs) and generative AI is recommended but not mandatory. Experience working with APIs (such as REST APIs) will be helpful. No prior experience with agentic AI frameworks is required.
+
+Ensure the following tools are installed on your system:
+* [UV Package Manager](https://docs.astral.sh/uv/getting-started/installation/)
+* [Python](https://docs.astral.sh/uv/guides/install-python/)
+* [Git Version Control](https://github.com/git-guides/install-git)
 
 #### 1. Setting up a Virtual Environment
 
@@ -17,7 +25,8 @@ https://github.com/openhackathons-org/agentic-ai-bootcamp
 cd agentic-ai-bootcamp
 ```
 
-Create and activate a new virtual environment:
+Create and activate a new virtual environment using **Python 3.13 or newer**:
+
 ```bash
 # Create virtual environment
 python -m venv agentic-ai-env
@@ -30,57 +39,39 @@ source agentic-ai-env/bin/activate
 
 With the virtual environment activated, install the required packages:
 ```bash
-# Upgrade pip (recommended)
-pip install --upgrade pip
-
 # Install requirements
-pip install -r https://github.com/openhackathons-org/agentic-ai-bootcamp/blob/main/requirements.txt 
+uv pip install -r requirements.txt
 ```
 
+#### 3. Installing VS Code Server (code-server)
 
-#### 3. Verifying GPU Access
-
-To verify that your environment can access GPU resources, run the following Python commands:
-```python
-import torch
-
-# Check if CUDA is available
-print(f"CUDA available: {torch.cuda.is_available()}")
-
-# If CUDA is available, show device information
-if torch.cuda.is_available():
-    print(f"Current device: {torch.cuda.get_device_name(0)}")
-    print(f"Device count: {torch.cuda.device_count()}")
-```
-
-You can run these commands either in a Python terminal or by creating a simple script.
-
-#### 4. Starting JupyterLab
-
-To start JupyterLab on port 8888:
 ```bash
-#Choose the desired workspace:
-cd workspace-nim-with-rag
-# Basic start
-jupyter lab --port 8888
+curl -fsSL https://code-server.dev/install.sh | sh
 
-# If you want to make it accessible from other machines on your network
-jupyter lab --port 8888 --ip 0.0.0.0
-
-# If you want to specify a particular browser
-jupyter lab --port 8888 --browser="chrome"
+code-server --auth none --port 8888
 ```
 
 After running the command, you should see output similar to:
+
 ```
-[I 2025-01-29 10:00:00.000 LabApp] JupyterLab extension loaded from /path/to/extension
-[I 2025-01-29 10:00:00.000 LabApp] JupyterLab application directory is /path/to/app
-[I 2025-01-29 10:00:00.000 ServerApp] Serving notebooks from local directory: /path/to/your/project
-[I 2025-01-29 10:00:00.000 ServerApp] Jupyter Server 1.x is running at:
-[I 2025-01-29 10:00:00.000 ServerApp] http://localhost:8888/lab
+[2026-04-15T08:04:15.280Z] info  Wrote default config file to /Users/krkalyan/.config/code-server/config.yaml
+[2026-04-15T08:04:15.461Z] info  code-server 4.112.0 d7599ae360900ad55b503e3c840b417a1eae4798
+[2026-04-15T08:04:15.462Z] info  Using user-data-dir /Users/root/.local/share/code-server
+[2026-04-15T08:04:15.468Z] info  Using config file /Users/root/.config/code-server/config.yaml
+[2026-04-15T08:04:15.468Z] info  HTTP server listening on http://127.0.0.1:8888/
+[2026-04-15T08:04:15.468Z] info    - Authentication is enabled
+[2026-04-15T08:04:15.468Z] info      - Using password from /Users/root/.config/code-server/config.yaml
+[2026-04-15T08:07:10.214Z] info    - Authentication is disabled
+[2026-04-15T08:04:15.468Z] info    - Not serving HTTPS
 ```
 
 Copy the URL from the output and paste it into your browser. If prompted for a token, you can find it in the terminal output.
+
+#### 4. Opening the labs
+
+With **code-server** running, open **http://localhost:8888** in your browser (or use the URL printed in the terminal if it differs). In the workspace, open the **tutorial** directory and start from **start_here.ipynb**.
+
+When you are finished with the labs close your shell or pressing **Ctrl+D** in the terminal. Congratulations, you've successfully built and deployed an Agentic AI Bootcamp!
 
 #### Troubleshooting
 
@@ -88,7 +79,7 @@ If you encounter any issues:
 
 1. **Virtual Environment Issues**
    - Make sure you're in the correct directory when creating the virtual environment
-   - Verify that the virtual environment is activated (you should see `(nim-bootcamp-env)` in your terminal prompt)
+   - Verify that the virtual environment is activated (you should see `(agentic-ai-env)` in your terminal prompt)
 
 2. **Package Installation Issues**
    - Try updating pip before installing requirements: `pip install --upgrade pip`
@@ -99,13 +90,9 @@ If you encounter any issues:
    - Check if CUDA toolkit is installed and matches your PyTorch version
    - Run `nvidia-smi` in terminal to verify GPU is recognized
 
-4. **JupyterLab Access Issues**
+4. **VSCode Access Issues**
    - Make sure port 8888 is not being used by another application
    - If accessing from another machine, ensure firewall settings allow the connection
    - Try a different port if 8888 is unavailable
 
 For additional help, please open an issue in the GitHub repository.
-
-Open the browser at `http://localhost:8888` and go click on the `start_here.ipynb`. As soon as you are done with the rest of the labs, shut down jupyter lab by selecting `File > Shut Down` and the container by typing `exit` or pressing `ctrl+d` in the terminal window.
-
-Congratulations, you've successfully built and deployed an Agentic AI Bootcamp!
