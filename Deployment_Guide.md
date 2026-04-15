@@ -48,6 +48,8 @@ uv pip install -r requirements.txt
 ```bash
 curl -fsSL https://code-server.dev/install.sh | sh
 
+# Install Python Extensions
+code-server --install-extension ms-python.python --install-extension ms-toolsai.jupyter
 code-server --auth none --port 8888
 ```
 
