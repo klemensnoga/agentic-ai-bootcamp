@@ -43,7 +43,59 @@ With the virtual environment activated, install the required packages:
 uv pip install -r requirements.txt
 ```
 
-#### 3. Installing VS Code Server (code-server)
+#### 3. Run Phoenix UI Server
+
+[Arize Phoenix](https://arize.com/docs/phoenix) is an open-source observability UI used in some labs to collect and inspect traces (for example, from LLM and agent runs). Start it in a **separate terminal** while your virtual environment is activated, and leave that terminal running while you work through the notebooks.
+
+```bash
+# Launch the Phoenix web UI and trace collector (default UI port is 6006)
+phoenix serve
+```
+
+Example startup output (versions and paths may differ on your machine):
+
+```
+✅ Migrations completed in 0.613 seconds.
+INFO:     Started server process [23099]
+INFO:     Waiting for application startup.
+
+
+██████╗ ██╗  ██╗ ██████╗ ███████╗███╗   ██╗██╗██╗  ██╗
+██╔══██╗██║  ██║██╔═══██╗██╔════╝████╗  ██║██║╚██╗██╔╝
+██████╔╝███████║██║   ██║█████╗  ██╔██╗ ██║██║ ╚███╔╝
+██╔═══╝ ██╔══██║██║   ██║██╔══╝  ██║╚██╗██║██║ ██╔██╗
+██║     ██║  ██║╚██████╔╝███████╗██║ ╚████║██║██╔╝ ██╗
+╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝ v14.5.0
+
+|  ⭐️⭐️⭐️ Support Open Source ⭐️⭐️⭐️
+|  ⭐️⭐️⭐️ Star on GitHub! ⭐️⭐️⭐️
+|  https://github.com/Arize-ai/phoenix
+|
+|  🌎 Join our Community 🌎
+|  https://join.slack.com/t/arize-ai/shared_invite/zt-3r07iavnk-ammtATWSlF0pSrd1DsMW7g
+|
+|  📚 Documentation 📚
+|  https://arize.com/docs/phoenix
+|
+|  🚀 Phoenix Server 🚀
+|  Phoenix UI: http://localhost:6006
+|
+|  Authentication: False
+|  Log traces:
+|    - gRPC: http://localhost:4317
+|    - HTTP: http://localhost:6006/v1/traces
+|  Storage: sqlite:////Users/krkalyan/.phoenix/phoenix.db
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:6006 (Press CTRL+C to quit)
+```
+
+From this output, the useful bits are:
+
+- **Phoenix UI** — open **http://localhost:6006** in a browser to explore traces and experiments.
+- **Storage** — Phoenix uses a local SQLite database under your home directory (the exact path is printed in the log).
+- **Stopping the server** — press **Ctrl+C** in the terminal where `phoenix serve` is running when you no longer need the UI.
+
+#### 4. Installing VS Code Server (code-server)
 
 ```bash
 curl -fsSL https://code-server.dev/install.sh | sh
@@ -65,7 +117,7 @@ After running the command, you should see output similar to:
 [2026-04-15T08:04:15.468Z] info    - Not serving HTTPS
 ```
 
-#### 4. Opening the labs
+#### 5. Opening the labs
 
 With **code-server** running, open **http://localhost:8888** in your browser (or use the URL printed in the terminal if it differs). In the workspace, open the **tutorial** directory and start from **start_here.ipynb**.
 
