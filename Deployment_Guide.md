@@ -59,13 +59,9 @@ After running the command, you should see output similar to:
 [2026-04-15T08:04:15.462Z] info  Using user-data-dir /Users/root/.local/share/code-server
 [2026-04-15T08:04:15.468Z] info  Using config file /Users/root/.config/code-server/config.yaml
 [2026-04-15T08:04:15.468Z] info  HTTP server listening on http://127.0.0.1:8888/
-[2026-04-15T08:04:15.468Z] info    - Authentication is enabled
-[2026-04-15T08:04:15.468Z] info      - Using password from /Users/root/.config/code-server/config.yaml
 [2026-04-15T08:07:10.214Z] info    - Authentication is disabled
 [2026-04-15T08:04:15.468Z] info    - Not serving HTTPS
 ```
-
-Copy the URL from the output and paste it into your browser. If prompted for a token, you can find it in the terminal output.
 
 #### 4. Opening the labs
 
