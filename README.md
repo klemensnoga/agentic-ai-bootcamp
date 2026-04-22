@@ -3,10 +3,6 @@
 # Agentic AI Bootcamp
 This bootcamp is a hands-on path from inference to production-style agents. You will call **NVIDIA® NIM™** from cloud and local endpoints, expose and consume capabilities with the **Model Context Protocol (MCP)** (including a low-level server implementation), and orchestrate reasoning and tool use with **LangGraph**. You will then use **NeMo Agent Toolkit (NAT)** to connect MCP tools to NIM with **YAML** workflow configuration—plus observability and evaluation—before tying the stack together in a final **Challenge**.
 
-## Bootcamp Prerequisites
-
-The target audience for these labs is researchers, developers, and graduate students who are interested in Retrieval Augmented Generation and the NIM approach to solving Generative AI tasks with GPUs. Participants are expected to have Python programming knowledge, basic prior knowledge of SQL databases and queries, Natural Language Processing knowledge, and NVIDIA NGC and API keys.
-
 ## Bootcamp Content
 This content contains 5 Labs, plus a challenge:
 
