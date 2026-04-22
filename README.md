@@ -23,6 +23,7 @@ The tools and frameworks used in this bootcamp are as follows
 3. [LangGraph](https://langchain-ai.github.io/langgraph/)
 4. [NeMo Agent Toolkit](https://docs.nvidia.com/nemo/agent-toolkit/latest/index.html)
 5. [Agent Skills](https://agentskills.io/)
+6. [OpenClaw](https://openclaw.ai)
 
 ## Deploying the Bootcamp Material
 
