@@ -20,8 +20,9 @@ The tools and frameworks used in this bootcamp are as follows
 1. [NVIDIA NIM](https://docs.nvidia.com/nim/index.html)
 2. [Model Context Protocol](https://modelcontextprotocol.io/introduction)
 3. [LangGraph](https://langchain-ai.github.io/langgraph/)
-4. [NeMo Agent Toolkit](https://docs.nvidia.com/nemo/agent-toolkit/latest/index.html)
-5. [Agent Skills](https://agentskills.io/)
+4. [NVIDIA NeMo Agent Toolkit (NAT)](https://docs.nvidia.com/nemo/agent-toolkit/latest/index.html)
+5. [Phoenix](https://phoenix.arize.com/)
+6. [Agent Skills](https://agentskills.io/)
 
 ## Deploying the Bootcamp Material
 
