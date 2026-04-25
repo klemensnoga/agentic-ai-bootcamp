@@ -17,6 +17,8 @@ Ensure the following tools are installed on your system:
 * [Python](https://docs.astral.sh/uv/guides/install-python/)
 * [Git Version Control](https://github.com/git-guides/install-git)
 
+For local run setups, ensure that port `8000` (used by local NIM and other local HTTP services in the labs) and port `6006` (used by Phoenix) are available before starting the notebooks.
+
 #### 1. Setting up a Virtual Environment
 
 First, clone this repository and navigate to the project directory:
