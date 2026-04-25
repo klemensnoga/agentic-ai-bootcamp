@@ -10,7 +10,7 @@ We tested and ran all labs on a DGX machine equipped with an A100 and H100 GPUs 
 
 ### Prerequisites
 
-Basic experience with Python programming is required for this bootcamp. Familiarity with fundamental concepts of Large Language Models (LLMs) and generative AI is recommended but not mandatory. Experience working with APIs (such as REST APIs) will be helpful. No prior experience with agentic AI frameworks is required.
+Participants are expected to have Python programming knowledge, basic prior knowledge of SQL databases and queries, Natural Language Processing knowledge, and NVIDIA NGC and API keys.
 
 Ensure the following tools are installed on your system:
 * [UV Package Manager](https://docs.astral.sh/uv/getting-started/installation/)
