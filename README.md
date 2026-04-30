@@ -24,8 +24,28 @@ The tools and frameworks used in this bootcamp are as follows
 4. [NeMo Agent Toolkit](https://docs.nvidia.com/nemo/agent-toolkit/latest/index.html)
 5. [Phoenix](https://phoenix.arize.com/)
 6. [Agent Skills](https://agentskills.io/)
-5. [Agent Skills](https://agentskills.io/)
-6. [OpenClaw](https://openclaw.ai)
+7. [OpenClaw](https://openclaw.ai)
+
+## Prerequisites
+
+Participant:
+* Knowledge in at least 1 agentic framework - e.g. LangChain/LangGraph, LlamaIndex.  
+* Experience in using docker to deploy workloads.  
+
+Development environment:
+* Python 3.13
+* UV python package manager
+* Modern IDE - e.g. VSCode, Cursor, Zed
+* Permission to install software and python packages
+* Unix-like operating system - e.g. ubuntu, MacOS
+* Claude Desktop (optional)
+
+Miscellaneous:
+* Nvidia NGC API Key
+
+## Personas
+
+Data Scientists, Developers
 
 ## Deploying the Bootcamp Material
 
