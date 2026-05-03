@@ -37,8 +37,7 @@ Development environment:
 * UV python package manager
 * Modern IDE - e.g. VSCode, Cursor, Zed
 * Permission to install software and python packages
-* Unix-like operating system - e.g. ubuntu, MacOS
-* Claude Desktop (optional)
+* Unix-like operating system - e.g. ubuntu, MacOS (preferred)
 
 Miscellaneous:
 * Nvidia NGC API Key
@@ -54,4 +53,4 @@ To deploy the Labs, please refer to the deployment guide presented [here](./Depl
 ## Bootcamp Duration
 
 The duration of the tutorial is 2 hours.  
-The duration of the challenge is 4 hours.
+The duration of the challenge is 3 hours.
