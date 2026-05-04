@@ -1,0 +1,12 @@
+{
+  "python.defaultInterpreterPath": "/opt/agentic-ai-env/bin/python",
+  "python.linting.enabled": true,
+  "python.terminal.executeInFileDir": true,
+  "terminal.integrated.cwd": "/workspace/agentic-ai-bootcamp",
+  "jupyter.kernels.excludePythonEnvironments": [
+    "/usr/local/bin/python",
+    "/usr/local/bin/python3",
+    "/usr/local/bin/python3.13"
+  ],
+  "chat.disableAIFeatures": true
+}
