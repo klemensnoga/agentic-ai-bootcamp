@@ -1,32 +1,23 @@
 # Agentic AI Bootcamp
 
-The Agentic AI Bootcamp helps developers get started with building AI agents that can interact with external tools, data sources, and services. The labs guide participants through deploying NVIDIA® NIM™ microservices via cloud and local endpoints, and implementing the Model Context Protocol (MCP) for standardized AI-to-tool communication. Attendees will build MCP servers using both high-level (FastMCP) and low-level SDKs, exploring Stdio and HTTP transports for local and remote deployments. Participants will also design agentic workflows using LangGraph's StateGraph to orchestrate multi-step reasoning and tool invocation. The bootcamp concludes with a hands-on challenge where attendees build a complete AI agent integrating Q&A and Invoice MCP servers.
+This bootcamp is a hands-on path from inference to production-style agents. You will call **NVIDIA® NIM™** from cloud and local endpoints, expose and consume capabilities with the **Model Context Protocol (MCP)** (including a low-level server implementation), and orchestrate reasoning and tool use with **LangGraph**. You will then use **NeMo Agent Toolkit (NAT)** to connect MCP tools to NIM with **YAML** workflow configuration—plus observability and evaluation—before tying the stack together in a final **Challenge**.
 
-### Deployment Options
-
-This bootcamp supports two flexible deployment configurations:
-
-**Option 1: Cloud-Based Deployment**
-
-When following `01_inference_endpoint.ipynb`, execute the **Cloud Endpoint** section and skip the **Local Endpoint** section.
-
-- **Hardware Requirements:** Any standard laptop or workstation (GPU not required)
-- **NIM Configuration:** Connects to NVIDIA AI cloud endpoints through API access
-- **Estimated Setup:** Approximately 10 minutes
-
-**Option 2: Self-Hosted Deployment**
-
-When following `01_inference_endpoint.ipynb`, execute the **Local Endpoint** section and skip the **Cloud Endpoint** section.
-
-- **Hardware Requirements:** GPU-enabled infrastructure (e.g., GPU node or cluster)
-- **NIM Configuration:** Run NVIDIA NIM microservices directly on your own hardware
-- **Estimated Setup:** Approximately 25 minutes (including NIM service deployment)
+## Deploying the Labs
 
 ### Tested environment
 
-We tested and ran all labs on a DGX machine equipped with an Ampere A100 and H100 GPU.
+We tested and ran all labs on a DGX machine equipped with an A100 and H100 GPUs (80GB).
 
-# Deploying the Labs
+### Prerequisites
+
+Participants are expected to have Python programming knowledge, basic prior knowledge of SQL databases and queries, Natural Language Processing knowledge, and NVIDIA NGC and API keys.
+
+Ensure the following tools are installed on your system:
+* [UV Package Manager](https://docs.astral.sh/uv/getting-started/installation/)
+* [Python](https://docs.astral.sh/uv/guides/install-python/)
+* [Git Version Control](https://github.com/git-guides/install-git)
+
+For local run setups, ensure that port `8000` (used by local NIM and other local HTTP services in the labs) and port `6006` (used by Phoenix) are available before starting the notebooks.
 
 #### 1. Setting up a Virtual Environment
 
@@ -36,7 +27,8 @@ https://github.com/openhackathons-org/agentic-ai-bootcamp
 cd agentic-ai-bootcamp
 ```
 
-Create and activate a new virtual environment:
+Create and activate a new virtual environment using **Python 3.13 or newer**:
+
 ```bash
 # Create virtual environment
 python -m venv agentic-ai-env
@@ -49,60 +41,89 @@ source agentic-ai-env/bin/activate
 
 With the virtual environment activated, install the required packages:
 ```bash
-# Upgrade pip (recommended)
-pip install --upgrade pip
-
 # Install requirements
-pip install -r https://github.com/openhackathons-org/agentic-ai-bootcamp/blob/main/requirements.txt 
+uv pip install -r requirements.txt
 ```
 
+#### 3. Run Phoenix UI Server
 
-#### 3. Verifying GPU Access
+[Arize Phoenix](https://arize.com/docs/phoenix) is an open-source observability UI used in some labs to collect and inspect traces (for example, from LLM and agent runs). Start it in a **separate terminal** while your virtual environment is activated, and leave that terminal running while you work through the notebooks.
 
-**Note:** This step is only applicable if you have GPU access. If you're using the cloud-based deployment option, you may skip this section.
-
-To confirm that your environment can successfully detect and access GPU resources, execute the following Python commands:
-
-```python
-import torch
-
-# Check if CUDA is available
-print(f"CUDA available: {torch.cuda.is_available()}")
-
-# If CUDA is available, show device information
-if torch.cuda.is_available():
-    print(f"Current device: {torch.cuda.get_device_name(0)}")
-    print(f"Device count: {torch.cuda.device_count()}")
-```
-
-You can run these commands either in a Python terminal or by creating a simple script.
-
-#### 4. Starting JupyterLab
-
-To start JupyterLab on port 8888:
 ```bash
-#Choose the desired workspace:
-cd workspace-nim-with-rag
-# Basic start
-jupyter lab --port 8888
+# Launch the Phoenix web UI and trace collector (default UI port is 6006)
+phoenix serve
+```
 
-# If you want to make it accessible from other machines on your network
-jupyter lab --port 8888 --ip 0.0.0.0
+Example startup output (versions and paths may differ on your machine):
 
-# If you want to specify a particular browser
-jupyter lab --port 8888 --browser="chrome"
+```
+✅ Migrations completed in 0.613 seconds.
+INFO:     Started server process [23099]
+INFO:     Waiting for application startup.
+
+
+██████╗ ██╗  ██╗ ██████╗ ███████╗███╗   ██╗██╗██╗  ██╗
+██╔══██╗██║  ██║██╔═══██╗██╔════╝████╗  ██║██║╚██╗██╔╝
+██████╔╝███████║██║   ██║█████╗  ██╔██╗ ██║██║ ╚███╔╝
+██╔═══╝ ██╔══██║██║   ██║██╔══╝  ██║╚██╗██║██║ ██╔██╗
+██║     ██║  ██║╚██████╔╝███████╗██║ ╚████║██║██╔╝ ██╗
+╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚═╝╚═╝  ╚═╝ v14.5.0
+
+|  ⭐️⭐️⭐️ Support Open Source ⭐️⭐️⭐️
+|  ⭐️⭐️⭐️ Star on GitHub! ⭐️⭐️⭐️
+|  https://github.com/Arize-ai/phoenix
+|
+|  🌎 Join our Community 🌎
+|  https://join.slack.com/t/arize-ai/shared_invite/zt-3r07iavnk-ammtATWSlF0pSrd1DsMW7g
+|
+|  📚 Documentation 📚
+|  https://arize.com/docs/phoenix
+|
+|  🚀 Phoenix Server 🚀
+|  Phoenix UI: http://localhost:6006
+|
+|  Authentication: False
+|  Log traces:
+|    - gRPC: http://localhost:4317
+|    - HTTP: http://localhost:6006/v1/traces
+|  Storage: sqlite:////Users/krkalyan/.phoenix/phoenix.db
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:6006 (Press CTRL+C to quit)
+```
+
+From this output, the useful bits are:
+
+- **Phoenix UI** — open **http://localhost:6006** in a browser to explore traces and experiments.
+- **Storage** — Phoenix uses a local SQLite database under your home directory (the exact path is printed in the log).
+- **Stopping the server** — press **Ctrl+C** in the terminal where `phoenix serve` is running when you no longer need the UI.
+
+#### 4. Installing VS Code Server (code-server)
+
+```bash
+curl -fsSL https://code-server.dev/install.sh | sh
+
+# Install Python Extensions
+code-server --install-extension ms-python.python --install-extension ms-toolsai.jupyter
+code-server --auth none --port 8888
 ```
 
 After running the command, you should see output similar to:
+
 ```
-[I 2025-01-29 10:00:00.000 LabApp] JupyterLab extension loaded from /path/to/extension
-[I 2025-01-29 10:00:00.000 LabApp] JupyterLab application directory is /path/to/app
-[I 2025-01-29 10:00:00.000 ServerApp] Serving notebooks from local directory: /path/to/your/project
-[I 2025-01-29 10:00:00.000 ServerApp] Jupyter Server 1.x is running at:
-[I 2025-01-29 10:00:00.000 ServerApp] http://localhost:8888/lab
+[2026-04-15T08:04:15.280Z] info  Wrote default config file to /Users/krkalyan/.config/code-server/config.yaml
+[2026-04-15T08:04:15.461Z] info  code-server 4.112.0 d7599ae360900ad55b503e3c840b417a1eae4798
+[2026-04-15T08:04:15.462Z] info  Using user-data-dir /Users/root/.local/share/code-server
+[2026-04-15T08:04:15.468Z] info  Using config file /Users/root/.config/code-server/config.yaml
+[2026-04-15T08:04:15.468Z] info  HTTP server listening on http://127.0.0.1:8888/
+[2026-04-15T08:07:10.214Z] info    - Authentication is disabled
+[2026-04-15T08:04:15.468Z] info    - Not serving HTTPS
 ```
 
-Copy the URL from the output and paste it into your browser. If prompted for a token, you can find it in the terminal output.
+#### 5. Opening the labs
+
+With **code-server** running, open **http://localhost:8888** in your browser (or use the URL printed in the terminal if it differs). In the workspace, open the **tutorial** directory and start from **start_here.ipynb**.
+
+When you are finished with the labs close your shell or pressing **Ctrl+D** in the terminal. Congratulations, you've successfully built and deployed an Agentic AI Bootcamp!
 
 ### Troubleshooting
 
@@ -121,13 +142,9 @@ If you encounter any issues:
    - Check if CUDA toolkit is installed and matches your PyTorch version
    - Run `nvidia-smi` in terminal to verify GPU is recognized
 
-4. **JupyterLab Access Issues**
+4. **VSCode Access Issues**
    - Make sure port 8888 is not being used by another application
    - If accessing from another machine, ensure firewall settings allow the connection
    - Try a different port if 8888 is unavailable
 
 For additional help, please open an issue in the GitHub repository.
-
-Open the browser at `http://localhost:8888` and go click on the `start_here.ipynb`. As soon as you are done with the rest of the labs, shut down jupyter lab by selecting `File > Shut Down` and the container by typing `exit` or pressing `ctrl+d` in the terminal window.
-
-Congratulations, you've successfully built and deployed an Agentic AI Bootcamp!

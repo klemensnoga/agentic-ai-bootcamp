@@ -1,0 +1,12 @@
+[project]
+name = "qna-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "langchain>=1.2.7",
+    "langchain-nvidia-ai-endpoints>=1.0.2",
+    "langgraph>=1.0.7",
+    "strictyaml>=1.7.3",
+]

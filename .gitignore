@@ -9,3 +9,7 @@ wheels/
 # Virtual environments
 .venv
 .vscode/
+tutorial/jupyter_notebook/skills/
+
+# macOS
+.DS_Store
