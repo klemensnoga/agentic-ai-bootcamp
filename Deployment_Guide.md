@@ -4,6 +4,15 @@ This bootcamp is a hands-on path from inference to production-style agents. You 
 
 ## Deploying the Labs
 
+Two deployment options are supported:
+
+- **DGX / DGXC clusters** — install dependencies directly on the host and run `phoenix` and `code-server` from your shell.
+- **Local with Docker Compose** — build a self-contained image that bundles Python, the lab requirements, and `code-server`, and mount the repo as a workspace.
+
+Pick whichever matches your environment and skip the other section.
+
+## DGX / DGXC Deployment
+
 ### Tested environment
 
 We tested and ran all labs on a DGX machine equipped with an A100 and H100 GPUs (80GB).
@@ -148,3 +157,62 @@ If you encounter any issues:
    - Try a different port if 8888 is unavailable
 
 For additional help, please open an issue in the GitHub repository.
+
+## Local Deployment with Docker Compose
+
+This option packages the entire environment — Python 3.13, the lab requirements, and `code-server` with the Python and Jupyter extensions — into a single container. It is the fastest way to run the bootcamp on a laptop or workstation without touching the host's Python installation.
+
+### Prerequisites
+
+- [Docker Engine](https://docs.docker.com/engine/install/) **24+** with the [Compose plugin](https://docs.docker.com/compose/install/) (`docker compose version` should succeed)
+- Ports `8888` (code-server) and `6006` (Phoenix) free on the host
+- Roughly **6 GB** of free disk space for the image
+
+A GPU is **not** required for the local container; the labs reach NIM endpoints over the network. If you do have an NVIDIA GPU and want to use it, install the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) and add a `deploy.resources.reservations.devices` block to `docker-compose.yml`.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/openhackathons-org/agentic-ai-bootcamp
+cd agentic-ai-bootcamp
+```
+
+### 2. Build and start the container
+
+From the repo root, build the image and start the service in the background:
+
+```bash
+docker compose up --build -d
+```
+
+The first build takes a few minutes while `requirements.txt` is installed and `code-server` is downloaded. Subsequent starts reuse the cached image and come up in seconds.
+
+The compose file mounts the repo at `/workspace/agentic-ai-bootcamp` and `settings.json` at `/workspace/agentic-ai-bootcamp/.vscode/settings.json`, so any edits you make on the host are visible inside the container immediately — no rebuild required.
+
+### 3. Open the labs
+
+Open **http://localhost:8888** in your browser. code-server will load the `agentic-ai-bootcamp` workspace; navigate to the `tutorial` directory and start from `start_here.ipynb`.
+
+### 4. Run Phoenix UI Server
+
+Phoenix is installed inside the container. Follow the instructions in [lab 5](./tutorial/jupyter_notebook/05_nemo_agent_toolkit.ipynb) to launch the Phoenix server.
+
+The UI is published on the host at **http://localhost:6006** via the port mapping in `docker-compose.yml`.
+
+### 5. Stopping and cleaning up
+
+```bash
+# Stop the container but keep the image
+docker compose down
+
+# Stop and remove the built image
+docker compose down --rmi local
+```
+
+### Troubleshooting
+
+1. **Port already in use** — another process is bound to `8888` or `6006`. Either free the port or remap it in `docker-compose.yml` (e.g. `"9000:8888"`).
+2. **Permission denied on bind mount** — on Linux, the container writes as `root` by default; files it creates may be owned by `root` on the host. Run `sudo chown -R $USER:$USER .` after stopping the container if needed.
+3. **Image rebuild after editing `requirements.txt`** — bind mounts only cover the repo; package changes require `docker compose up --build` to reinstall inside the image.
+4. **Code-server unreachable from another machine** — `docker-compose.yml` binds to all interfaces inside the container, but Docker only publishes to `localhost` by default. Change the port mapping to `"0.0.0.0:8888:8888"` or use SSH port forwarding.
+
