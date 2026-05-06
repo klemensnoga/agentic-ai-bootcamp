@@ -35,9 +35,6 @@ RUN python -m ipykernel install \
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version "${CODE_SERVER_VERSION}" \
     && code-server --install-extension ms-python.python --install-extension ms-toolsai.jupyter
 
-COPY . .
-COPY settings.json /workspace/agentic-ai-bootcamp/.vscode/settings.json
-
 EXPOSE 8888 6006
 
 CMD ["code-server", "/workspace/agentic-ai-bootcamp", "--bind-addr", "0.0.0.0:8888", "--auth", "none"]
