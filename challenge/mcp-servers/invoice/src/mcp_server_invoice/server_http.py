@@ -7,6 +7,7 @@ from starlette.routing import Mount
 from starlette.types import Receive, Scope, Send
 import mcp.types as types
 from typing import List
+import os
 import sqlite3
 import json
 from pathlib import Path
@@ -250,7 +251,8 @@ def main(db_path:str):
         lifespan=lifespan,
     )
 
-    uvicorn.run(starlette_app, host="127.0.0.1")
+    port = int(os.environ.get("MCP_PORT", "8000"))
+    uvicorn.run(starlette_app, host="127.0.0.1", port=port)
 
 class ServerWrapper():
     """A wrapper to compat with mcp[cli]"""

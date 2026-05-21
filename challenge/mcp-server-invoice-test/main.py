@@ -1,4 +1,5 @@
 import json
+import os
 import argparse
 import asyncio
 from mcp_http_client import MCPHTTPCLIENT
@@ -17,8 +18,8 @@ async def test_mcp_invoice_server(mcp_server_url):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='mcp server invoice test')
-    parser.add_argument('--mcp-server-url', 
-                       default="http://localhost:8000/mcp",
+    parser.add_argument('--mcp-server-url',
+                       default=f"http://localhost:{os.environ.get('MCP_PORT', '8000')}/mcp",
                        help='mcp server url')
     args = parser.parse_args()
     asyncio.run(test_mcp_invoice_server(args.mcp_server_url))
