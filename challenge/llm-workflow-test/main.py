@@ -4,6 +4,7 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent.resolve()))
 import asyncio
 import argparse
+import os
 from langgraph.checkpoint.memory import InMemorySaver
 from llm_workflow import create_workflow
 
@@ -40,8 +41,8 @@ if __name__ == '__main__':
     parser.add_argument('--nvidia-api-key', 
                        default="",
                        help='your nvidia api key')
-    parser.add_argument('--mcp-server-url', 
-                       default="http://localhost:8000/mcp",
+    parser.add_argument('--mcp-server-url',
+                       default=f"http://localhost:{os.environ.get('MCP_PORT', '8000')}/mcp",
                        help='mcp server url')
     parser.add_argument('--inf-url', 
                        default="https://integrate.api.nvidia.com/v1",
