@@ -7,6 +7,7 @@ ENV VIRTUAL_ENV=/opt/agentic-ai-env \
     PATH="/opt/agentic-ai-env/bin:${PATH}" \
     UV_LINK_MODE=copy \
     JUPYTER_PLATFORM_DIRS=1 \
+    NAT_TELEMETRY_ENABLED=false \
     MCP_PORT=8000 \
     PHOENIX_PORT=6006
 
@@ -33,7 +34,8 @@ RUN python -m ipykernel install \
     --display-name "Python 3.13 (agentic-ai-env)"
 
 RUN curl -fsSL https://code-server.dev/install.sh | sh -s -- --version "${CODE_SERVER_VERSION}" \
-    && code-server --install-extension ms-python.python --install-extension ms-toolsai.jupyter
+    && code-server --install-extension ms-python.python --install-extension ms-toolsai.jupyter \
+    && code-server --uninstall-extension ms-python.vscode-python-envs
 
 EXPOSE 8888 6006
 

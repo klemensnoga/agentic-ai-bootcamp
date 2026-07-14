@@ -1,5 +1,6 @@
 {
   "python.defaultInterpreterPath": "/opt/agentic-ai-env/bin/python",
+  "python.useEnvironmentsExtension": false,
   "python.linting.enabled": true,
   "python.terminal.executeInFileDir": true,
   "terminal.integrated.cwd": "/workspace/agentic-ai-bootcamp",
