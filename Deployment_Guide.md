@@ -32,7 +32,7 @@ For local run setups, ensure that port `8000` (used by local NIM and other local
 
 First, clone this repository and navigate to the project directory:
 ```bash
-https://github.com/openhackathons-org/agentic-ai-bootcamp
+https://github.com/klemensnoga/agentic-ai-bootcamp
 cd agentic-ai-bootcamp
 ```
 
