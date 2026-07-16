@@ -19,6 +19,7 @@ RUN apt-get update \
         curl \
         git \
         tini \
+        zip \
     && rm -rf /var/lib/apt/lists/*
 
 RUN python -m venv "${VIRTUAL_ENV}" \
