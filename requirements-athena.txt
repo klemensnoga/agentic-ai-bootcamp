@@ -1,0 +1,5 @@
+# JupyterHub for tutorial accounts on Athena
+jupyterhub
+jupyterlab
+jupyterlab_nvdashboard
+ipykernel
