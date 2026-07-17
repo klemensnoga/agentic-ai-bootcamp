@@ -19,3 +19,6 @@ nvidia-nat[profiling]>=1.5.0
 
 # Observability
 arize-phoenix>=13.15.0
+
+# YAML parsing
+strictyaml>=1.7.3
